@@ -240,13 +240,14 @@ class _ReorderableListState extends State<ReorderableList>
     }
     _hapticFeedback();
     final draggedItem = _items[_dragging];
-    draggedItem.update();
-    _dragProxy.setWidget(
-        draggedItem.widget
-            .childBuilder(draggedItem.context, ReorderableItemState.dragProxy),
-        draggedItem.context.findRenderObject());
+    if (draggedItem != null) {
+      draggedItem.update();
+      _dragProxy.setWidget(
+          draggedItem.widget.childBuilder(
+              draggedItem.context, ReorderableItemState.dragProxy),
+          draggedItem.context.findRenderObject());
+    }
     this._scrollable.position.addListener(this._scrolled);
-
     return this;
   }
 
